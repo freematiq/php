@@ -1,0 +1,17 @@
+{
+    "name": "freematiq/lesson7",
+    "description": "7 lesson",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Freematiq\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sergey D",
+            "email": "sd@freematiq.com"
+        }
+    ],
+    "require": {}
+}
