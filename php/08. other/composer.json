@@ -1,0 +1,19 @@
+{
+    "name": "freematiq/lesson6",
+    "description": "6 lesson sample",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Freematiq\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cpt. Jack Sparrow",
+            "email": "ph4nt0m055@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.0"
+    }
+}
