@@ -51,6 +51,13 @@ $config = [
                 'course/<action>' => 'course/<action>',
             ],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => false,
+                'yii\bootstrap\BootstrapPluginAsset' => false,
+            ],
+        ],
     ],
     'params' => $params,
 ];

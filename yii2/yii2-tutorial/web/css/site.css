@@ -113,3 +113,23 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.navbar {
+    font-weight: bold;
+}
+
+.section-about {
+    color: white;
+    background: url('/images/index-about.jpg') center top no-repeat;
+    background-size: cover;
+    padding-bottom: 3em;
+}
+
+h2 {
+     text-transform: uppercase;
+    margin: 2em 0;
+}
+
+.about-one {
+    padding-left: 2em;
+}
