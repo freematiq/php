@@ -60,4 +60,13 @@ class Course extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Lessons::className(), ['id_course' => 'id']);
     }
+
+    /**
+     * @inheritdoc
+     * @return CoursesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CoursesQuery(get_called_class());
+    }
 }

@@ -14,6 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if (Yii::$app->session->hasFlash('subscribe_done')): ?>
+        <div class="alert alert-success">
+            <?= Html::encode(Yii::$app->session->getFlash('subscribe_done')) ?>
+        </div>
+    <?php endif; ?>
+    <?php if (Yii::$app->session->hasFlash('subscribe_error')): ?>
+        <div class="alert alert-danger">
+            <?= Html::encode(Yii::$app->session->getFlash('subscribe_error')) ?>
+        </div>
+    <?php endif; ?>
+
     <?php if (\Yii::$app->user->can('manager')): ?>
         <p>
             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -37,5 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
         ],
     ]) ?>
+
+    <p>
+        <?php if ($subscription): ?>
+            Вы подписаны! <?= $subscription->created_at ?>
+            Ваш комментарий: <?= Html::encode($subscription->comment) ?>
+        <?php else: ?>
+            <?= $this->render('/subscribe/_form', [
+                'model' => $subscribeForm,
+            ]) ?>
+        <?php endif; ?>
+    </p>
 
 </div>

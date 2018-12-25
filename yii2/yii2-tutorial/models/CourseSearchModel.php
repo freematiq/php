@@ -18,8 +18,9 @@ class CourseSearchModel extends Course
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['title', 'slug', 'about', 'description'], 'safe'],
+            [['id'], 'integer', 'message' => 'Значение должно быть числом'],
+            [['title'], 'string'],
+            [['slug', 'about', 'description'], 'safe'],
         ];
     }
 
@@ -47,6 +48,9 @@ class CourseSearchModel extends Course
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);

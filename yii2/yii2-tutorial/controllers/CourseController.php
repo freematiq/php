@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Subscribe;
 use Yii;
 use app\models\Course;
 use app\models\CourseSearchModel;
@@ -9,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\forms\SubscribeForm;
 
 /**
  * CourseController implements the CRUD actions for Course model.
@@ -22,13 +24,13 @@ class CourseController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
@@ -63,8 +65,18 @@ class CourseController extends Controller
      */
     public function actionView($id)
     {
+        $course = $this->findModel($id);
+        $subscribeForm = new SubscribeForm($course);
+
+        $subscription = Subscribe::findOne([
+            'id_user' => Yii::$app->user->id,
+            'id_course' => $course->id,
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $course,
+            'subscribeForm' => $subscribeForm,
+            'subscription' => $subscription,
         ]);
     }
 
