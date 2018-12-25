@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -20,7 +21,8 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Ubuntu:700&amp;amp;subset=cyrillic" type="text/css"  rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Ubuntu:700&amp;amp;subset=cyrillic"
+          type="text/css" rel="stylesheet"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -34,21 +36,28 @@ AppAsset::register($this);
         'brandLabel' => 'Digitalspace',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Lessons', 'url' => ['/lesson']],
-            ['label' => 'Users', 'url' => ['/user']],
-            ['label' => 'Register', 'url' => ['/register']],
-            ['label' => 'Course', 'url' => ['/course']],
-            ['label' => 'Timetable', 'url' => ['/timetable']],
-            ['label' => 'Journal', 'url' => ['/journal']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Уроки', 'url' => ['/lesson']],
+            Yii::$app->user->can('admin') ? (
+            ['label' => 'Пользователи', 'url' => ['/user']]
+            ) : '',
+            ['label' => 'Курсы', 'url' => ['/course']],
+
+            ['label' => 'Расписание', 'url' => ['/timetable']],
+            Yii::$app->user->can('admin') ? (
+            ['label' => 'Журнал', 'url' => ['/journal']]
+            ) : '',
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Регистрация', 'url' => ['/register']]
+            ) : '',
+            Yii::$app->user->isGuest ? (
+            ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -75,6 +84,10 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">Digitalspace — образовательно-событийный центр, &copy; <?= date('Y') ?></p>
+        <p class="pull-right">Мы в социальных сетях:
+            <a href="https://vk.com/dspacepro"><i class="icon-vk-logo">vk.com</i></a>
+            <a href="https://facebook.com/dspacepro"><i class="icon-facebook-logo">facebook.com</i></a>
+        </p>
     </div>
 </footer>
 

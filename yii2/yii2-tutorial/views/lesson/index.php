@@ -16,9 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Lessons', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (\Yii::$app->user->can('manager')): ?>
+        <p>
+            <?= Html::a('Create Lessons', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

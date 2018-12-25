@@ -43,12 +43,17 @@ $config = [
             ],
         ],
         'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 'register' => 'site/register',
                 'course/<action>' => 'course/<action>',
+                'subscribe' => 'subscribe/subscribe',
             ],
         ],
         'assetManager' => [

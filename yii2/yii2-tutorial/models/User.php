@@ -4,7 +4,7 @@ namespace app\models;
 
 /**
  * User model
- * 
+ *
  * @property integer $id
  * @property string $username
  * @property string $password_hash
@@ -26,7 +26,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return '{{%user}}';
     }
 
-    
+
     /**
      * @inheritdoc
      */
@@ -78,7 +78,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -114,7 +114,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->auth_key = \Yii::$app->security->generateRandomString();
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -122,7 +122,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasMany(Journal::className(), ['id_user' => 'id']);
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */

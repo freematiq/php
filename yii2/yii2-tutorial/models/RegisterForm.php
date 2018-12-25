@@ -16,7 +16,7 @@ class RegisterForm extends Model
     public $username;
     public $email;
     public $password;
-    
+
     /**
      * @inheritdoc
      */
@@ -36,7 +36,7 @@ class RegisterForm extends Model
             ['password', 'string', 'min' => 6],
         ];
     }
-    
+
     /**
      * Registers user
      *
@@ -47,13 +47,22 @@ class RegisterForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+
+        if ($user->save()) {
+
+            $rbac = \Yii::$app->authManager;
+            $studentRole = $rbac->getRole('student');
+            $rbac->assign($studentRole, $user->id);
+
+            return $user;
+        }
+
+        return null;
     }
 }
