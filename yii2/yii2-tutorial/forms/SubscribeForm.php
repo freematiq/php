@@ -14,6 +14,9 @@ class SubscribeForm extends Model
     public $message = null;
     public $course_id = null;
 
+    /* @var UploadedFile */
+    public $file = null;
+
     public function __construct(Course $course = null) {
         if (null !== $course) {
             $this->course_id = $course->id;
@@ -25,6 +28,7 @@ class SubscribeForm extends Model
         return [
             ['message', 'string', 'max' => 1024],
             ['course_id', 'integer'],
+            ['file', 'file'],
         ];
     }
 

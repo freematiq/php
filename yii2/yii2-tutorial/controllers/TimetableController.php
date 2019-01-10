@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\Lessons;
+use yii\helpers\ArrayHelper;
 
 /**
  * TimetableController implements the CRUD actions for Timetable model.
@@ -81,6 +83,7 @@ class TimetableController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'lessons' => ArrayHelper::map(Lessons::find()->all(), 'id', 'title'),
             ]);
         }
     }
@@ -100,6 +103,7 @@ class TimetableController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'lessons' => ArrayHelper::map(Lessons::find()->all(), 'id', 'title'),
             ]);
         }
     }

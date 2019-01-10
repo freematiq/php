@@ -14,9 +14,10 @@ use Yii;
  * @property string $comment
  * @property string $created_at
  * @property string $updated_at
+ * @property string filename
  *
  * @property Course $course
- * @property User $course0
+ * @property User $user
  */
 class Subscribe extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,7 @@ class Subscribe extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['comment'], 'string', 'max' => 1024],
             [['id_course'], 'exist', 'skipOnError' => true, 'targetClass' => Course::class, 'targetAttribute' => ['id_course' => 'id']],
-            [['id_course'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_course' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
 
@@ -72,8 +73,18 @@ class Subscribe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCourse0()
+    public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'id_course']);
+        return $this->hasOne(User::class, ['id' => 'id_user']);
+    }
+
+    public function getUploadPath()
+    {
+        return empty($this->filename) ? null : '/uploads/' . $this->filename;
+    }
+
+    public static function getUnresolvedCount()
+    {
+        return self::find()->count();
     }
 }

@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Course */
+/* @var $subscription app\models\Subscribe */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['index']];
@@ -53,6 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if ($subscription): ?>
             Вы подписаны! <?= $subscription->created_at ?>
             Ваш комментарий: <?= Html::encode($subscription->comment) ?>
+            <?php if ($subscription->filename): ?>
+                Документ: <a href="/uploads/<?= $subscription->filename ?>">Скачать</a>
+            <?php endif; ?>
         <?php else: ?>
             <?= $this->render('/subscribe/_form', [
                 'model' => $subscribeForm,

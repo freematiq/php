@@ -54,6 +54,7 @@ $config = [
                 'register' => 'site/register',
                 'course/<action>' => 'course/<action>',
                 'subscribe' => 'subscribe/subscribe',
+                'subscriptions' => 'subscribe/index',
             ],
         ],
         'assetManager' => [

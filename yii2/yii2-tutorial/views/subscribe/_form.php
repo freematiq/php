@@ -12,10 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
             'action' => ['/subscribe'],
-            'options' => ['method' => 'post']]
+            'options' => [
+                'method' => 'post',
+                'enctype' => 'multipart/form-data',
+            ]
+        ]
     ); ?>
 
     <?= $form->field($model, 'message')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file')->fileInput() ?>
     <?= $form->field($model, 'course_id')->hiddenInput() ?>
 
     <div class="form-group">
