@@ -10,6 +10,7 @@ namespace app\models;
  * @property string $password_hash
  * @property string $email
  * @property integer $status
+ * @property integer $balance
  * @property string $auth_key
  * @property string $password write-only password
  */
