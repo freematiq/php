@@ -1,6 +1,9 @@
 <?php
 use \yii\helpers\Html;
 ?>
+<p>DB: <?= number_format($total_db, 10) ?></p>
+<p>Memory: <?= number_format($total_mem, 10) ?></p>
+<p>Variable: <?= number_format($total_var, 10) ?></p>
 <ol>
     <?php foreach($subs as $s): ?>
         <li>

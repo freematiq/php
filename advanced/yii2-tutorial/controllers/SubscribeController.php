@@ -42,9 +42,30 @@ class SubscribeController extends \yii\web\Controller
 
     public function actionIndex()
     {
+        $subs = \Yii::$app->cache->get('subscrs');
+        $subs2 = $subs;
+        if (empty($subs)) {
+            $subs = Subscribe::find()->all();
+            \Yii::$app->cache->set('subscrs', $subs);
+        }
+
+        $start = microtime(true);
         $subs = Subscribe::find()->all();
+        $total_db = microtime(true) - $start;
+
+        $start = microtime(true);
+        $subs = \Yii::$app->cache->get('subscrs');
+        $total_mem = microtime(true) - $start;
+
+        $start = microtime(true);
+        $subs2 = $subs;
+        $total_var = microtime(true) - $start;
+
         return $this->render('index', [
             'subs' => $subs,
+            'total_db' => $total_db,
+            'total_mem' => $total_mem,
+            'total_var' => $total_var,
         ]);
     }
 
@@ -75,6 +96,8 @@ class SubscribeController extends \yii\web\Controller
             } else {
                 \Yii::$app->session->setFlash('subscribe_error', 'Form: ' . print_r($subscription->errors, true));
             }
+
+            \Yii::$app->cache->delete('subscrs');
 
             return $this->redirect(['course/view', 'id' => $course->id]);
         } else {

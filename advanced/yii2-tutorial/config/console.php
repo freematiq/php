@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$cache = require(__DIR__ . '/cache.php');
 
 $config = [
     'id' => 'basic-console',
@@ -13,6 +14,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'cache' => $cache,
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
