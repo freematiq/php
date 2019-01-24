@@ -49,7 +49,7 @@ class CourseSearchModel extends Course
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 5,
             ],
         ]);
 

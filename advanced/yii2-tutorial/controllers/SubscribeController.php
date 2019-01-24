@@ -99,6 +99,17 @@ class SubscribeController extends \yii\web\Controller
 
             \Yii::$app->cache->delete('subscrs');
 
+            if (\Yii::$app->request->isAjax) {
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                \Yii::$app->session->removeFlash('subscribe_done');
+                \Yii::$app->session->removeFlash('subscribe_error');
+                $data = [
+                    'demo' => 'answer',
+                    'message' => 'Вы подписаны! ' . (new \DateTime($subscription->created_at))->format(\DateTime::W3C),
+                ];
+                return $data;
+            }
+
             return $this->redirect(['course/view', 'id' => $course->id]);
         } else {
             \Yii::$app->session->setFlash('subscribe_error', 'Validate: ' . print_r($form->errors, true));

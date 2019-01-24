@@ -13,10 +13,6 @@ use kartik\date\DatePicker;
 <div class="timetable-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <!--<?php //$form->field($model, 'start_time_test')->textInput() ?>-->
-    <?php $form->field($model, 'start_time_html5')->input('datetime-local') ?>
-
     <?php echo $form->field($model, 'start_day')->widget(DatePicker::classname(), [
         'options' => [
             'placeholder' => 'Выберите день',
