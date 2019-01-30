@@ -64,6 +64,8 @@ class TimetableSearch extends Timetable
             'id_lesson' => $this->id_lesson,
         ]);
 
+        $query->joinWith('lesson')->joinWith('users');
+
         return $dataProvider;
     }
 }
