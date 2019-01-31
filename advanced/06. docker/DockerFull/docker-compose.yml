@@ -1,0 +1,65 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8088:80"
+    volumes:
+      - ./src:/app
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+    links:
+      - php
+
+#  db:
+#    image: mysql:5.7
+#    volumes:
+#      - ./db_data:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 123
+#      MYSQL_DATABASE: changeme
+#      MYSQL_USER: changeme
+#      MYSQL_PASSWORD: 123
+#    ports:
+#      - "33306:3306"
+
+  db:
+    #build: ./postgres
+    # можно использовать image: postgres:latest
+    image: postgres:latest
+    volumes:
+    #  - postgres:/var/lib/postgresql/data
+      - ./pgdb:/data/postgres
+    ports:
+      - "7432:5432"
+    environment:
+        POSTGRES_DB: yii2db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: secret
+        PGDATA: /data/postges
+
+  memcached:
+    build: ./memcached
+    volumes:
+      - memcached:/var/lib/memcached
+    ports:
+      - "11222:11211"
+    links:
+      - php
+
+  php:
+    build: ./src
+    volumes:
+      - ./src:/app
+    depends_on:
+      - db
+#    environment:
+#      PHP_DB_HOST: db:3306
+#      PHP_DB_USER: changeme
+#      PHP_DB_PASSWORD: 123
+
+
+volumes:
+  postgres:
+    driver: "local"
+  memcached:
+    driver: "local"

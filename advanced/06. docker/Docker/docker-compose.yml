@@ -1,0 +1,16 @@
+web:
+  image: nginx:latest
+  ports:
+    - "8088:80"
+  volumes:
+    - ./basic:/code
+    - ./hosts:/etc/nginx/conf.d/
+  links:
+    - php
+
+php:
+  image: php:7.0-fpm
+  volumes:
+    - ./basic:/code
+
+
