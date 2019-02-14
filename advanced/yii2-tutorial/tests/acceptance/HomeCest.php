@@ -1,18 +1,17 @@
 <?php
-
-use yii\helpers\Url;
+use yii\helpers\Url as Url;
 
 class HomeCest
 {
     public function ensureThatHomePageWorks(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/index'));        
-        $I->see('My Company');
+        $I->see('Digitalspace');
         
-        $I->seeLink('About');
-        $I->click('About');
+        $I->seeLink('Курсы');
+        $I->click('Курсы');
         $I->wait(2); // wait for page to be opened
         
-        $I->see('This is the About page.');
+        $I->see('Courses');
     }
 }

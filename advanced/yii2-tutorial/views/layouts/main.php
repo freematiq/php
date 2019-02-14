@@ -43,32 +43,39 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Уроки', 'url' => ['/lesson']],
+            ['label' => 'Русский', 'url' => ['/user/lang/ru']],
+            ['label' => 'English', 'url' => ['/user/lang/en']],
+            ['label' => Yii::t('app', 'main'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'cost: {0, ordinal}', 42), 'url' => ['/lesson']],
             Yii::$app->user->can('admin') ? (
-            ['label' => 'Пользователи', 'url' => ['/user']]
+            ['label' => Yii::t('app', 'users'), 'url' => ['/user']]
             ) : '',
-            ['label' => 'Курсы', 'url' => ['/course']],
+            ['label' => Yii::t('app', 'courses'), 'url' => ['/course']],
 
-            ['label' => 'Расписание', 'url' => ['/timetable']],
+            ['label' => Yii::t('app', 'timetable'), 'url' => ['/timetable']],
             Yii::$app->user->can('admin') ? (
-            ['label' => 'Журнал', 'url' => ['/journal']]
+            ['label' => Yii::t('app', 'journal'), 'url' => ['/journal']]
             ) : '',
             Yii::$app->user->can('manager') ? (
                 '<li>
-                <a href="/subscriptions">Заявки <span class="badge">'. Subscribe::getUnresolvedCount() .'</span></a>
+                <a href="/subscriptions"><span class="badge">' . Subscribe::getUnresolvedCount() . '</span> ' .
+                Yii::t('app', 'orders {n}', [
+                    'n' => Subscribe::getUnresolvedCount()
+                ]) . '</a>
                 </li>'
             ) : '',
             Yii::$app->user->isGuest ? (
-            ['label' => 'Регистрация', 'url' => ['/register']]
+            ['label' => Yii::t('app', 'register'), 'url' => ['/register']]
             ) : '',
             Yii::$app->user->isGuest ? (
-            ['label' => 'Вход', 'url' => ['/site/login']]
+            ['label' => Yii::t('app', 'login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    Yii::t('app', 'logout ({username})', [
+                        'username' => Yii::$app->user->identity->username,
+                    ]),
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

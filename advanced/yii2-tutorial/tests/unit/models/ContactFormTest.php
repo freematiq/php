@@ -2,8 +2,22 @@
 
 namespace tests\models;
 
+use app\models\ContactForm;
+use app\tests\fixtures\UserFixture;
+
 class ContactFormTest extends \Codeception\Test\Unit
 {
+    public function _fixtures()
+    {
+        return [
+            'profiles' => [
+                'class' => UserFixture::className(),
+                // fixture data located in tests/_data/user.php
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+        ];
+    }
+
     private $model;
     /**
      * @var \UnitTester

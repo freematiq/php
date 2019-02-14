@@ -19,6 +19,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 0;
 
+    public static function roundBank($value, $precision = 2)
+    {
+        $pow = pow(10, $precision + 1);
+
+        $n3 = ($value * $pow) % 10;
+        $n = (int)($value * $pow) / $pow;
+
+        if (abs($n - $value) < 0.001) {
+            return round(floor($value * $pow) / $pow, $precision, PHP_ROUND_HALF_EVEN);
+        }
+
+        return round($value, $precision);
+    }
+
      /**
      * @inheritdoc
      */

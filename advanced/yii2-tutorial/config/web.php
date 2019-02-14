@@ -12,6 +12,8 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+//    'language' => 'ru-RU',
+    'language' => 'en-US',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -54,9 +56,11 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'register' => 'site/register',
+                'contact' => 'site/contact',
                 'course/<action>' => 'course/<action>',
                 'subscribe' => 'subscribe/subscribe',
                 'subscriptions' => 'subscribe/index',
+                'user/lang/<lang>' => 'site/lang',
             ],
         ],
         'assetManager' => [
@@ -66,6 +70,20 @@ $config = [
                 'yii\bootstrap\BootstrapPluginAsset' => false,
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'forceTranslation' => true,
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+//                    'class' => 'yii\i18n\DbMessageSource',
+//                    'sourceMessageTable'=>'{{%source_message}}',
+//                    'messageTable'=>'{{%message}}',
+//                    'enableCaching' => true,
+//                    'cachingDuration' => 10,
+                ]
+            ]
+        ]
     ],
     'params' => $params,
 ];

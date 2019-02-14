@@ -1,5 +1,4 @@
 <?php
-
 class LoginFormCest
 {
     public function _before(\FunctionalTester $I)
@@ -18,15 +17,15 @@ class LoginFormCest
     {
         $I->amLoggedInAs(100);
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see('Logout (php)');
     }
 
     // demonstrates `amLoggedInAs` method
     public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
+        $I->amLoggedInAs(\app\models\User::findByUsername('php'));
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see('Logout (php)');
     }
 
     public function loginWithEmptyCredentials(\FunctionalTester $I)
@@ -50,10 +49,10 @@ class LoginFormCest
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'admin',
+            'LoginForm[username]' => 'php',
+            'LoginForm[password]' => '123123',
         ]);
-        $I->see('Logout (admin)');
-        $I->dontSeeElement('form#login-form');              
+        $I->see('Logout (php)');
+        $I->dontSeeElement('form#login-form');
     }
 }

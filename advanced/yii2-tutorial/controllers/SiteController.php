@@ -68,6 +68,33 @@ class SiteController extends Controller
         ]);
     }
 
+    public function init() {
+        if (($cookie = Yii::$app->request->cookies->get('language')) !== null) {
+            if ('ru-RU' === $cookie->value) {
+                Yii::$app->language = 'ru-RU';
+            } else {
+                Yii::$app->language = 'en-US';
+            }
+        }
+    }
+
+    public function actionLang($lang) {
+        if ('en' === $lang) {
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name' => 'language',
+                'value' => 'en-EN',
+            ]));
+
+        } else {
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name' => 'language',
+                'value' => 'ru-RU',
+            ]));
+            Yii::$app->language = 'ru-RU';
+        }
+        $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Login action.
      *

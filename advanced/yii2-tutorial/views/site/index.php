@@ -7,7 +7,7 @@ $this->title = 'Digital space';
 <div class="site-index">
 
     <div class="row">
-        <div class="text-center"><h2>Все курсы</h2></div>
+        <div class="text-center"><h2><?= Yii::t('app', 'all courses') ?></h2></div>
         <ul>
             <?php foreach($courses as $course) : ?>
                 <li><?= $course->title ?></li>
@@ -15,7 +15,7 @@ $this->title = 'Digital space';
         </ul>
     </div>
     <div class="row">
-        <div class="text-center"><h2>События</h2></div>
+        <div class="text-center"><h2><?= Yii::t('app', 'events') ?></h2></div>
     </div>
     <div class="row section-about">
         <div class="text-center">
@@ -23,8 +23,8 @@ $this->title = 'Digital space';
         </div>
         <div class="row">
             <div class="about-one col-xs-12 col-sm-6 col-md-3 sm-margin">
-                <h3>Авторизированный Учебный центр </h3>
-                <p>Ведущих ИТ-компаний региона (Freematiq, Mitra)  для лучших выпускников курсов – собеседование – стажировка, трудоустройство, оплата курсов</p>
+                <h3><?= Yii::t('app', 'auth center') ?></h3>
+                <p><?= Yii::t('app', 'about graduators') ?></p>
             </div>
             <div class="about-one col-xs-12 col-sm-6 col-md-3 sm-margin">
                 <h3>Уникальный комплекс образовательных программ </h3>
